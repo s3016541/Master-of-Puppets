@@ -71,4 +71,4 @@ this.
 7. Ensure /usr/local/bin is in everyone's path on the system.
 
 8. For all the services you installed in part 3, ensure each service subscribes to the file
-(eg: service restarts if files change).
+(eg: service restarts if files change)..
