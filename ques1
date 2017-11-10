@@ -1,0 +1,11 @@
+
+
+user { 'becca':
+	ensure => 'present',
+	home => '/home/becca',
+		
+ 	groups => ['sysadmin', 'cars'],
+	uid => '10016541',
+	shell => 'bin/bash'
+}
+
