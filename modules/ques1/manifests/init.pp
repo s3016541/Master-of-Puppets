@@ -44,5 +44,56 @@
 #
 class ques1 {
 
+#creating users
+
+user { 'becca':
+	ensure => 'present',
+	home => '/home/becca',
+	managehome => 'true',		
+ 	groups => ['sysadmin', 'cars'],
+	uid => '10016541',
+	shell => 'bin/bash',
+}
+
+user { 'fred':
+	ensure => 'present',
+	home => '/home/fred',
+	managehome => 'true',
+	groups => ['trucks', 'cars'],
+	
+	uid => '10026541',
+	shell => 'bin/csh',
+}
+
+user { 'wilma':
+	ensure => 'present',
+	home => '/home/fred',
+	managehome => 'true',	
+	groups => ['trucks', 'cars', 'ambulances'],
+
+	uid => '10036541'
+}
+
+#creating groups
+
+group { 'sysadmin':
+	ensure => 'present',
+	gid => '501'
+}
+
+group { 'trucks':
+        ensure => 'present',
+        gid => '502'
+}
+
+group { 'cars':
+        ensure => 'present',
+        gid => '503'
+}
+
+group { 'ambulances':
+        ensure => 'present',
+        gid => '504'
+}
 
 }
