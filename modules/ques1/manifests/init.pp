@@ -71,7 +71,7 @@ user { 'wilma':
 	home => '/home/wilma',
 	managehome => 'true',
 	password => generate('/bin/sh', '-c', "openssl passwd -1 -salt verysalty secretpassword | tr -d '\n'"),
-	groups => ['trucks', 'cars', 'ambulances'],
+	groups => ['trucks', 'cars', 'ambulances', 'sshdragon'],
 
 	uid => '10036541'
 }
@@ -80,22 +80,60 @@ user { 'wilma':
 
 group { 'sysadmin':
 	ensure => 'present',
-	gid => '501'
+	gid => '5001'
 }
 
 group { 'trucks':
         ensure => 'present',
-        gid => '502'
+        gid => '5002'
 }
 
 group { 'cars':
         ensure => 'present',
-        gid => '503'
+        gid => '5003'
 }
 
 group { 'ambulances':
         ensure => 'present',
-        gid => '504'
+        gid => '5004'
 }
+
+group { 'sshdragon':
+	ensure => 'present',
+	gid => '5005'
+}
+
+#ssh keys for users
+
+file { "/home/wilma":
+	ensure => directory,
+	owner =>'wilma',
+	group => 'sshdragon',
+	mode => '0750',
+	require =>  [ User['wilma'], Group['sshdragon'] ],
+}
+
+
+# add the .ssh folder to user
+file { "/home/wilma/.ssh":
+	ensure => directory,
+	owner => 'wilma',
+	group => 'sshdragon',
+	mode => '0700',
+	#require =>  File["/home/wilma"],
+}
+
+ssh_authorized_key { 'wilma_ssh':
+	ensure => 'present',
+	user => 'wilma',
+	type => 'ssh-rsa',
+	key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCmqW384YX35bV9Mv+QOqh3EQG8QvB7hQH2aYhUPg0xJxa62Yus9sBTFXFqi1vRwqWbkE3rT7VZxr9BBMbFJdJR9Mj3UaSz2XVA0ZruWmyxjg6Q3Yozj2fLgcaajJbNFObh4dm2ooWvwUYn39Ruiu6q29rtoFbbjySAdEkcv3ZRksBdpTmcL+rz22xV2aYUu7CUDUmfnkDNh1zI2k6b/8Ls+C8RN+uMja7ODxv7SZ4Qr12Liotsu6/MEpTKB/tEVAE7LSwbbNLuCgkbv2OGoURXQosaj1ndM+oZhHlYrrVlzDGm9EsBLHE8y6W69CqfyPQYxxk/TSD1CmrP6YQ9R6Lt',
+}
+
+
+
+
+
+
 
 }
