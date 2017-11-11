@@ -52,7 +52,8 @@ user { 'becca':
 	managehome => 'true',		
  	groups => ['sysadmin', 'cars'],
 	uid => '10016541',
-	shell => 'bin/bash',
+	shell => '/bin/bash',
+	password => generate('/bin/sh', '-c', "openssl passwd -1 -salt verysalty secretpassword | tr -d '\n'"),
 }
 
 user { 'fred':
@@ -60,15 +61,16 @@ user { 'fred':
 	home => '/home/fred',
 	managehome => 'true',
 	groups => ['trucks', 'cars'],
-	
+		password => generate('/bin/sh', '-c', "openssl passwd -1 -salt verysalty secretpassword | tr -d '\n'"),
 	uid => '10026541',
-	shell => 'bin/csh',
+	shell => '/bin/csh',
 }
 
 user { 'wilma':
 	ensure => 'present',
-	home => '/home/fred',
-	managehome => 'true',	
+	home => '/home/wilma',
+	managehome => 'true',
+	password => generate('/bin/sh', '-c', "openssl passwd -1 -salt verysalty secretpassword | tr -d '\n'"),
 	groups => ['trucks', 'cars', 'ambulances'],
 
 	uid => '10036541'
