@@ -63,7 +63,7 @@ package { 'cgdb': ensure => installed }
 package { 'vim': ensure => installed }
 package { 'emacs': ensure => installed }
 #package { 'fuse-sshfs': ensure => installed }
-package { 'fuse-sshfs': ensure => installed, require => Yumrepo['epel'] }
+#package { 'fuse-sshfs': ensure => installed, require => Yumrepo['epel'] }
 
 
 file { '/etc/ssh/sshd_config':
