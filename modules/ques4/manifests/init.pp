@@ -104,6 +104,18 @@ augeas { "changeDocRoot":
 }
 
 
+## Ensure /usr/local/bin is in everyone's path on the system. 
+
+file { "/etc/environment":
+      owner   => "root",
+      group   => "root",
+      mode    => "440",
+}
+
+augeas { "addpathtoenv":
+	context => "/files/etc/environment",
+	changes => 'set PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"',
+}
 
 
 
