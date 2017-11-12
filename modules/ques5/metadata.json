@@ -1,0 +1,18 @@
+{
+  "name": "rmit-ques5",
+  "version": "0.1.0",
+  "author": "neville",
+  "summary": "Question 5 of Assignment 2 - Creating host records for ssh into rmit",
+  "license": "Apache-2.0",
+  "source": "",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ],
+  "data_provider": null
+}
+
