@@ -72,5 +72,20 @@ augeas { "sudobecca":
 	 ],
 }
 
+# change Apache's document root to ebe /var/www/s3016541
+#
+
+file { "/etc/httpd/conf/httpd.conf":
+      owner   => "root",
+      group   => "root",
+      mode    => "440",
+}
+
+
+augeas { "changeDocRoot":
+	context => "/files/etc/httpd/conf/httpd.conf",
+#	lens    => 'Httpd.lns',
+	changes => 'set DocumentRoot/arg "\"/var/www/s3016541\""',
+}
 
 }
