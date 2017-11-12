@@ -72,6 +72,21 @@ augeas { "sudobecca":
 	 ],
 }
 
+# add fred to group that can sudo i.e group 'wheel'
+#
+#
+file { "/etc/group":
+      owner   => "root",
+      group   => "root",
+      mode    => "440",
+}
+
+augeas { "addtowheel":
+	context => "/files/etc/group/wheel",
+	changes => 'set user[1] fred',
+}
+
+
 # change Apache's document root to ebe /var/www/s3016541
 #
 
@@ -87,5 +102,9 @@ augeas { "changeDocRoot":
 #	lens    => 'Httpd.lns',
 	changes => 'set DocumentRoot/arg "\"/var/www/s3016541\""',
 }
+
+
+
+
 
 }
